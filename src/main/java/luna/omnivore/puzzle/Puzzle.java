@@ -2,6 +2,7 @@ package luna.omnivore.puzzle;
 
 import luna.omnivore.internal.PuzzleParser;
 import luna.omnivore.model.Molecule;
+import luna.omnivore.model.ParseException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,17 +37,25 @@ public final class Puzzle{
 	}
 	
 	public static @NotNull Puzzle fromBytes(byte @NotNull [] bytes){
-		return fromInputStream(new ByteArrayInputStream(bytes));
+		try{
+			return fromInputStream(new ByteArrayInputStream(bytes));
+		}catch(IOException e){
+			throw new ParseException("Invalid puzzle data: reached the end prematurely!", e);
+		}
 	}
 	
 	public static @NotNull Puzzle fromResource(@NotNull Class<?> domain, @NotNull String name){
 		InputStream stream = domain.getClassLoader().getResourceAsStream(name);
 		if(stream == null)
 			throw new IllegalArgumentException("Specified resource doesn't exist!");
-		return fromInputStream(stream);
+		try{
+			return fromInputStream(stream);
+		}catch(IOException e){
+			throw new ParseException("Invalid puzzle data: could not read, or reached the end prematurely!", e);
+		}
 	}
 	
-	public static @NotNull Puzzle fromInputStream(@NotNull InputStream stream){
+	public static @NotNull Puzzle fromInputStream(@NotNull InputStream stream) throws IOException{
 		return PuzzleParser.parse(new DataInputStream(stream));
 	}
 }
