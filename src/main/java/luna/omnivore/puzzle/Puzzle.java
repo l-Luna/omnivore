@@ -40,7 +40,7 @@ public final class Puzzle{
 		try{
 			return fromInputStream(new ByteArrayInputStream(bytes));
 		}catch(IOException e){
-			throw new ParseException("Invalid puzzle data: reached the end prematurely!", e);
+			throw new ParseException("Reached the end of data prematurely!", e);
 		}
 	}
 	
@@ -51,7 +51,7 @@ public final class Puzzle{
 		try{
 			return fromInputStream(stream);
 		}catch(IOException e){
-			throw new ParseException("Invalid puzzle data: could not read, or reached the end prematurely!", e);
+			throw new ParseException("Could not read, or reached the end of data prematurely!", e);
 		}
 	}
 	

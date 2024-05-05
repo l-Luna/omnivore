@@ -16,7 +16,7 @@ public final class PuzzleParser{
 	
 	public static @NotNull Puzzle parse(DataInputStream stream) throws IOException{
 		if(stream.readInt() != 3)
-			throw new ParseException("Invalid puzzle data: not an Opus Magnum puzzle file!");
+			throw new ParseException("Not an Opus Magnum puzzle file: missing or wrong version number!");
 		
 		Puzzle puzzle = new Puzzle(CsParser.readString(stream));
 		puzzle.creatorSteamId = stream.readLong();
