@@ -12,8 +12,9 @@ import java.util.List;
 public class SolutionParser{
 	
 	public static @NotNull Solution parse(DataInputStream stream) throws IOException{
-		if(stream.readInt() != 7)
-			throw new ParseException("Not an Opus Magnum solution file: missing or wrong version number!");
+		int version = stream.readInt();
+		if(version != 7)
+			throw new ParseException("Not an Opus Magnum solution file: missing or wrong version number: expected 7, got " + version + "!");
 		
 		Solution solution = new Solution(CsParser.readString(stream), CsParser.readString(stream));
 		

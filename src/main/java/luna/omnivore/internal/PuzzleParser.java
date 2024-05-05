@@ -15,8 +15,9 @@ import java.util.Map;
 public final class PuzzleParser{
 	
 	public static @NotNull Puzzle parse(DataInputStream stream) throws IOException{
-		if(stream.readInt() != 3)
-			throw new ParseException("Not an Opus Magnum puzzle file: missing or wrong version number!");
+		int version = stream.readInt();
+		if(version != 3)
+			throw new ParseException("Not an Opus Magnum puzzle file: missing or wrong version number: expected 3, got " + version + "!");
 		
 		Puzzle puzzle = new Puzzle(CsParser.readString(stream));
 		puzzle.creatorSteamId = stream.readLong();
