@@ -1,5 +1,6 @@
 package luna.omnivore.puzzle;
 
+import luna.omnivore.internal.CsInputStream;
 import luna.omnivore.internal.PuzzleParser;
 import luna.omnivore.model.Molecule;
 import luna.omnivore.model.ParseException;
@@ -56,6 +57,6 @@ public final class Puzzle{
 	}
 	
 	public static @NotNull Puzzle fromInputStream(@NotNull InputStream stream) throws IOException{
-		return PuzzleParser.parse(new DataInputStream(stream));
+		return PuzzleParser.parse(new CsInputStream(stream));
 	}
 }

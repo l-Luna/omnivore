@@ -1,5 +1,6 @@
 package luna.omnivore.solution;
 
+import luna.omnivore.internal.CsInputStream;
 import luna.omnivore.internal.SolutionParser;
 import luna.omnivore.model.ParseException;
 import org.jetbrains.annotations.NotNull;
@@ -50,6 +51,6 @@ public final class Solution{
 	}
 	
 	public static @NotNull Solution fromInputStream(@NotNull InputStream stream) throws IOException{
-		return SolutionParser.parse(new DataInputStream(stream));
+		return SolutionParser.parse(new CsInputStream(stream));
 	}
 }

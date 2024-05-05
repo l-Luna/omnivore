@@ -5,18 +5,17 @@ import luna.omnivore.model.ParseException;
 import luna.omnivore.solution.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.List;
 
 public class SolutionParser{
 	
-	public static @NotNull Solution parse(DataInputStream stream) throws IOException{
+	public static @NotNull Solution parse(CsInputStream stream) throws IOException{
 		int version = stream.readInt();
 		if(version != 7)
 			throw new ParseException("Not an Opus Magnum solution file: missing or wrong version number: expected 7, got " + version + "!");
 		
-		Solution solution = new Solution(CsParser.readString(stream), CsParser.readString(stream));
+		Solution solution = new Solution(stream.readString(), stream.readString());
 		
 		int numMetrics = stream.readInt();
 		solution.metrics = switch(numMetrics){
@@ -43,8 +42,8 @@ public class SolutionParser{
 			default -> throw new ParseException("Invalid number of metrics " + numMetrics + "!");
 		};
 		
-		solution.parts = CsParser.readList(stream, s -> {
-			String partName = CsParser.readString(s);
+		solution.parts = stream.readList(s -> {
+			String partName = s.readString();
 			PartType partType = PartType.fromName(partName);
 			if(partType == null)
 				throw new ParseException("Invalid solution file part type with name \"" + partName + "\"!");
@@ -55,7 +54,7 @@ public class SolutionParser{
 			int armLength = s.readInt();
 			int rotation = s.readInt();
 			int ioIndex = s.readInt();
-			List<Instruction> instructions = CsParser.readList(s, s2 -> {
+			List<Instruction> instructions = s.readList(s2 -> {
 				int index = s2.readInt();
 				char instrId = (char)s2.readByte();
 				InstructionType type = InstructionType.fromId(instrId);
@@ -64,12 +63,12 @@ public class SolutionParser{
 				return new Instruction(type, index);
 			});
 			List<HexIndex> trackHexes = partType == PartType.track
-					? CsParser.readList(s, SolutionParser::readIntHexIndex)
+					? s.readList(SolutionParser::readIntHexIndex)
 					: List.of();
 			int armNumber = s.readInt() + 1;
 			int conduitIndex = partType == PartType.conduit ? s.readInt() : 0;
 			List<HexIndex> conduitHexes = partType == PartType.conduit
-					? CsParser.readList(s, SolutionParser::readIntHexIndex)
+					? s.readList(SolutionParser::readIntHexIndex)
 					: List.of();
 			return new Part(partType, position, rotation, armNumber, armLength, ioIndex, conduitIndex, trackHexes, conduitHexes, instructions);
 		});
@@ -77,7 +76,7 @@ public class SolutionParser{
 		return solution;
 	}
 	
-	private static HexIndex readIntHexIndex(DataInputStream stream) throws IOException{
+	private static HexIndex readIntHexIndex(CsInputStream stream) throws IOException{
 		return new HexIndex(stream.readInt(), stream.readInt());
 	}
 }
