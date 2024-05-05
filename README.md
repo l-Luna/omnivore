@@ -1,0 +1,1 @@
+Opus Magnum puzzle & solution file parser in Java, mostly based on [omsp](https://github.com/F43nd1r/omsp/) and [omsim-rs](https://github.com/l-Luna/omsim-rs/) (in Kotlin and Rust respectively).
