@@ -2,7 +2,7 @@ plugins {
     id("java")
 }
 
-group = "luna"
+group = "io.github.l-Luna"
 version = "1.0-SNAPSHOT"
 
 repositories {
