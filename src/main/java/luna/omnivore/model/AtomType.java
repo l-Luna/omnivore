@@ -12,6 +12,6 @@ public enum AtomType{
 	private static final AtomType[] values = values();
 	
 	public static AtomType fromId(byte id){
-		return values[id];
+		return values[id - 1];
 	}
 }
