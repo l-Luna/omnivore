@@ -31,6 +31,18 @@ public final class Puzzle{
 		this.name = name;
 	}
 	
+	public String toString(){
+		return "Puzzle[" +
+				"name='" + name + '\'' +
+				", creatorSteamId=" + creatorSteamId +
+				", permissions=" + permissions +
+				", inputs=" + inputs +
+				", outputs=" + outputs +
+				", outputMultiplier=" + outputMultiplier +
+				", productionInfo=" + productionInfo +
+				']';
+	}
+	
 	// factories
 	
 	public static @NotNull Puzzle fromFile(@NotNull String path) throws IOException{

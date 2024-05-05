@@ -25,6 +25,15 @@ public final class Solution{
 		this.name = name;
 	}
 	
+	public String toString(){
+		return "Solution[" +
+				"puzzleName='" + puzzleName + '\'' +
+				", name='" + name + '\'' +
+				", metrics=" + metrics +
+				", parts=" + parts +
+				']';
+	}
+	
 	// factories
 	
 	public static @NotNull Solution fromFile(@NotNull String path) throws IOException{
