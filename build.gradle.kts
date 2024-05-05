@@ -1,9 +1,10 @@
 plugins {
     id("java")
+    id("com.vanniktech.maven.publish") version "0.28.0"
 }
 
-group = "io.github.l-Luna"
-version = "1.0-SNAPSHOT"
+group = "io.github.l-luna"
+version = "0.1"
 
 repositories {
     mavenCentral()
