@@ -1,7 +1,9 @@
 package luna.omnivore.solution;
 
 import luna.omnivore.internal.CsInputStream;
+import luna.omnivore.internal.CsOutputStream;
 import luna.omnivore.internal.SolutionParser;
+import luna.omnivore.internal.SolutionWriter;
 import luna.omnivore.model.ParseException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -61,5 +63,26 @@ public final class Solution{
 	
 	public static @NotNull Solution fromInputStream(@NotNull InputStream stream) throws IOException{
 		return SolutionParser.parse(new CsInputStream(stream));
+	}
+	
+	// serializers
+	
+	public void toFile(@NotNull String path) throws IOException{
+		toOutputStream(new BufferedOutputStream(Files.newOutputStream(Path.of(path))));
+	}
+	
+	public byte @NotNull [] toBytes(){
+		var baos = new ByteArrayOutputStream();
+		try{
+			toOutputStream(baos);
+		}catch(IOException e){
+			// ByteArrayOutputStream::write does not throw IOExceptions
+			throw new RuntimeException(e);
+		}
+		return baos.toByteArray();
+	}
+	
+	public void toOutputStream(@NotNull OutputStream stream) throws IOException{
+		SolutionWriter.write(this, new CsOutputStream(stream));
 	}
 }
