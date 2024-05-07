@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.List;
 
-public class SolutionParser{
+public final class SolutionParser{
 	
 	public static @NotNull Solution parse(CsInputStream stream) throws IOException{
 		int version = stream.readInt();

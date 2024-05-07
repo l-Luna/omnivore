@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsInputStream{
+public final class CsInputStream{
 	
 	private final InputStream inner;
 	
