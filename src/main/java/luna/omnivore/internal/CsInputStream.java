@@ -29,11 +29,14 @@ public final class CsInputStream{
 	}
 	
 	public boolean readBoolean() throws IOException{
-		return readByte() != 0;
+		int read = inner.read();
+		return read != 0 && read != -1;
 	}
 	
 	public <U> List<U> readList(IoFunction<U> f) throws IOException{
 		int l = readInt();
+		if(l < 0)
+			throw new IllegalArgumentException("Cannot readList: Invalid list length: " + l);
 		List<U> ret = new ArrayList<>(l);
 		for(int i = 0; i < l; i++)
 			ret.add(f.apply(this));

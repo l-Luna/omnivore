@@ -1,7 +1,6 @@
 package luna.omnivore.puzzle;
 
-import luna.omnivore.internal.CsInputStream;
-import luna.omnivore.internal.PuzzleParser;
+import luna.omnivore.internal.*;
 import luna.omnivore.model.Molecule;
 import luna.omnivore.model.ParseException;
 import org.jetbrains.annotations.NotNull;
@@ -70,5 +69,26 @@ public final class Puzzle{
 	
 	public static @NotNull Puzzle fromInputStream(@NotNull InputStream stream) throws IOException{
 		return PuzzleParser.parse(new CsInputStream(stream));
+	}
+	
+	// serializers
+	
+	public void toFile(@NotNull String path) throws IOException{
+		toOutputStream(new BufferedOutputStream(Files.newOutputStream(Path.of(path))));
+	}
+	
+	public byte @NotNull [] toBytes(){
+		var baos = new ByteArrayOutputStream();
+		try{
+			toOutputStream(baos);
+		}catch(IOException e){
+			// ByteArrayOutputStream::write does not throw IOExceptions
+			throw new RuntimeException(e);
+		}
+		return baos.toByteArray();
+	}
+	
+	public void toOutputStream(@NotNull OutputStream stream) throws IOException{
+		PuzzleWriter.write(this, new CsOutputStream(stream));
 	}
 }
