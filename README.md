@@ -6,7 +6,7 @@ Opus Magnum puzzle & solution file parser & writer in Java, mostly based on [oms
 
 add it as a dependency:
 ```kt
-implementation("io.github.l-luna:omnivore:0.2")
+implementation("io.github.l-luna:omnivore:0.2.1")
 ```
 
 read a puzzle or solution file, or create them from scratch
