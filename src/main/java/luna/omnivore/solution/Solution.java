@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public final class Solution{
 	
@@ -34,6 +35,19 @@ public final class Solution{
 				", metrics=" + metrics +
 				", parts=" + parts +
 				']';
+	}
+	
+	public boolean equals(Object o){
+		return this == o
+				|| o instanceof Solution solution
+				&& puzzleName.equals(solution.puzzleName)
+				&& name.equals(solution.name)
+				&& Objects.equals(metrics, solution.metrics)
+				&& parts.equals(solution.parts);
+	}
+	
+	public int hashCode(){
+		return Objects.hash(puzzleName, name, metrics, parts);
 	}
 	
 	// factories

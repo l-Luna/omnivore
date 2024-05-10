@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public final class Puzzle{
 	
@@ -40,6 +41,22 @@ public final class Puzzle{
 				", outputMultiplier=" + outputMultiplier +
 				", productionInfo=" + productionInfo +
 				']';
+	}
+	
+	public boolean equals(Object o){
+		return this == o
+				|| o instanceof Puzzle puzzle
+				&& name.equals(puzzle.name)
+				&& creatorSteamId == puzzle.creatorSteamId
+				&& permissions.equals(puzzle.permissions)
+				&& inputs.equals(puzzle.inputs)
+				&& outputs.equals(puzzle.outputs)
+				&& outputMultiplier == puzzle.outputMultiplier
+				&& Objects.equals(productionInfo, puzzle.productionInfo);
+	}
+	
+	public int hashCode(){
+		return Objects.hash(name, creatorSteamId, permissions, inputs, outputs, outputMultiplier, productionInfo);
 	}
 	
 	// factories

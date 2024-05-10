@@ -16,10 +16,6 @@ public class PuzzleWriterTest{
 		Puzzle critellium = Puzzle.fromBytes(original);
 		byte[] reconstructed = critellium.toBytes();
 		Puzzle critellium2 = Puzzle.fromBytes(reconstructed);
-		assert critellium.name.equals(critellium2.name);
-		assert critellium.creatorSteamId == critellium2.creatorSteamId;
-		assert critellium.inputs.equals(critellium2.inputs);
-		assert critellium.outputs.equals(critellium2.outputs);
-		assert critellium.outputMultiplier == critellium2.outputMultiplier;
+		assert critellium.equals(critellium2);
 	}
 }

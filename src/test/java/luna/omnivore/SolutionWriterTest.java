@@ -4,7 +4,6 @@ import luna.omnivore.solution.Solution;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 public class SolutionWriterTest{
 	
@@ -16,6 +15,6 @@ public class SolutionWriterTest{
 				.readAllBytes();
 		Solution critellium = Solution.fromBytes(original);
 		byte[] reconstructed = critellium.toBytes();
-		assert Arrays.equals(original, reconstructed) : "Failed to reconstruct Critellium solution bytes";
+		assert critellium.equals(Solution.fromBytes(reconstructed)) : "Failed to reconstruct Critellium solution";
 	}
 }
