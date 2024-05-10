@@ -27,9 +27,9 @@ public final class PuzzleWriter{
 		
 		stream.writeInt(puzzle.outputMultiplier);
 		
+		stream.writeBoolean(puzzle.productionInfo != null);
 		if(puzzle.productionInfo != null){
 			ProductionInfo pi = puzzle.productionInfo;
-			stream.writeBoolean(true);
 			stream.writeBoolean(pi.shrinkLeft());
 			stream.writeBoolean(pi.shrinkRight());
 			stream.writeBoolean(pi.isolation());
