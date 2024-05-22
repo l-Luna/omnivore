@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +51,7 @@ public final class PuzzleParser{
 			atoms.put(idx, ty);
 		}
 		List<Bond> bonds = stream.readList(s -> new Bond(BondType.fromBits(s.readByte()), readByteHexIndex(s), readByteHexIndex(s)));
-		return new Molecule(atoms, bonds);
+		return new Molecule(atoms, new HashSet<>(bonds));
 	}
 	
 	private static HexIndex readByteHexIndex(CsInputStream stream) throws IOException{

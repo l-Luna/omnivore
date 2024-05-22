@@ -1,13 +1,10 @@
 package luna.omnivore.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public record Molecule(Map<HexIndex, AtomType> atoms, List<Bond> bonds){
+public record Molecule(Map<HexIndex, AtomType> atoms, Set<Bond> bonds){
 	
 	public Molecule(){
-		this(new HashMap<>(), new ArrayList<>());
+		this(new HashMap<>(), new HashSet<>());
 	}
 }
