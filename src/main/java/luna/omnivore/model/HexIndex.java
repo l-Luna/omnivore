@@ -1,11 +1,22 @@
 package luna.omnivore.model;
 
+import java.util.List;
+
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
 
 public record HexIndex(int u, int v){
 	
 	public static final HexIndex ORIGIN = new HexIndex(0, 0);
+	
+	public static final List<HexIndex> NEIGHBORS = List.of(
+			new HexIndex(1, 0),
+			new HexIndex(0, 1),
+			new HexIndex(-1, 1),
+			new HexIndex(-1, 0),
+			new HexIndex(0, -1),
+			new HexIndex(1, -1)
+	);
 	
 	/**
 	 * The implicit third coordinate of this position.

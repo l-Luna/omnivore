@@ -1,5 +1,7 @@
 package luna.omnivore.model;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -7,6 +9,10 @@ public record Molecule(Map<HexIndex, AtomType> atoms, Set<Bond> bonds){
 	
 	public Molecule(){
 		this(new HashMap<>(), new HashSet<>());
+	}
+	
+	public @Nullable AtomType getAtom(HexIndex at){
+		return atoms.get(at);
 	}
 	
 	public Molecule rotate(HexIndex around, int turns){
