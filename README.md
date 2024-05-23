@@ -6,7 +6,7 @@ Opus Magnum puzzle & solution file parser & writer in Java, mostly based on [oms
 
 add it as a dependency:
 ```kt
-implementation("io.github.l-luna:omnivore:0.2.1")
+implementation("io.github.l-luna:omnivore:0.3")
 ```
 
 read a puzzle or solution file, or create them from scratch
@@ -28,4 +28,4 @@ fromBeyond.toOutputStream(/* still want to buffer this one */);
 (again, all three are available for `Puzzle` and `Solution`)
 
 ## general data types
-alongside representing puzzles and solutions, omnivore also provides types like `HexIndex`, `Molecule`, `AtomType`, `Part`... for use in Opus Magnum-related programs. right now they're pretty bare-bones, but they may be improved for more standalone use.
+alongside representing puzzles and solutions, omnivore also provides types like `HexIndex`, `Molecule`, `AtomType`, `Part`... for use in Opus Magnum-related programs.
